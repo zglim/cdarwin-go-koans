@@ -5,7 +5,7 @@ func aboutEnumeration() {
 		var concatenated string
 		var total int
 
-		strings := []string{"hello", " world", "!"}
+		strings := greetingFragments()
 		for i, v := range strings {
 			total += i
 			concatenated += v
@@ -18,7 +18,7 @@ func aboutEnumeration() {
 	{
 		var totalLength int
 
-		strings := []string{"hello", " world", "!"}
+		strings := greetingFragments()
 		for _, v := range strings {
 			totalLength += len(v)
 		}

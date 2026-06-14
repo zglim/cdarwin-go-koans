@@ -1,7 +1,7 @@
 package go_koans
 
 func aboutSlices() {
-	fruits := []string{"apple", "orange", "mango"}
+	fruits := fruitNames()
 
 	assert(fruits[0] == __string__) // slices seem like arrays
 	assert(len(fruits) == __int__)  // in nearly all respects

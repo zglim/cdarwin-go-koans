@@ -3,7 +3,7 @@ package go_koans
 import "fmt"
 
 func aboutArrays() {
-	fruits := [4]string{"apple", "orange", "mango"}
+	fruits := fruitArray()
 
 	assert(fruits[0] == __string__) // indexes begin at 0
 	assert(fruits[1] == __string__) // one is indeed the loneliest number

@@ -1,20 +1,43 @@
 package go_koans
 
-func isPrimeNumber(possiblePrime int) bool {
-	for underPrime := 2; underPrime < possiblePrime; underPrime++ {
-		if possiblePrime%underPrime == 0 {
+// isPrimeNumber reports whether n is a prime number.
+func isPrimeNumber(n int) bool {
+	for d := 2; d < n; d++ {
+		if n%d == 0 {
 			return false
 		}
 	}
 	return true
 }
 
-func findPrimeNumbers(channel chan int) {
-	for i := 2; ; /* infinite loop */ i++ {
-		// your code goes here
-
-		assert(i < 100) // i is afraid of heights
+// sendPrimes sends exactly count prime numbers to ch, starting from 2.
+// The maxCandidate bound prevents runaway computation (height safety).
+// When done, it closes ch to signal that no more values will be sent.
+func sendPrimes(ch chan int, count int, maxCandidate int) {
+	sent := 0
+	for candidate := 2; sent < count && candidate < maxCandidate; candidate++ {
+		if isPrimeNumber(candidate) {
+			ch <- candidate
+			sent++
+		}
 	}
+	close(ch)
+}
+
+// collectPrimes reads all values from ch until the channel is closed,
+// returning them in receive order.
+func collectPrimes(ch chan int) []int {
+	var primes []int
+	for p := range ch {
+		primes = append(primes, p)
+	}
+	return primes
+}
+
+// findPrimeNumbers sends prime numbers to ch using the sendPrimes helper.
+func findPrimeNumbers(ch chan int) {
+	// your code goes here
+	// hint: call sendPrimes(ch, 5, 100) to send the first 5 primes
 }
 
 func aboutConcurrency() {
@@ -22,6 +45,7 @@ func aboutConcurrency() {
 
 	assert(__delete_me__) // concurrency can be almost trivial
 	// your code goes here
+	// hint: launch findPrimeNumbers(ch) in a goroutine with "go findPrimeNumbers(ch)"
 
 	assert(<-ch == 2)
 	assert(<-ch == 3)

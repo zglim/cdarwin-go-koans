@@ -1,5 +1,25 @@
 package go_koans
 
+// sendStrings sends each value from the slice into the channel, one at a time.
+// Each send blocks until buffer space (or a receiver) is available.
+func sendStrings(ch chan string, values ...string) {
+	for _, v := range values {
+		ch <- v
+	}
+}
+
+// receiveString reads exactly one value from the channel and returns it.
+func receiveString(ch chan string) string {
+	return <-ch
+}
+
+// drainChannel reads and discards n values from the channel, freeing buffer slots.
+func drainChannel(ch chan string, n int) {
+	for i := 0; i < n; i++ {
+		<-ch
+	}
+}
+
 func aboutChannels() {
 	ch := make(chan string, 2)
 
@@ -17,6 +37,7 @@ func aboutChannels() {
 	// which executes "concurrently" with the calling "goroutine"
 	go func() {
 		// your code goes here
+		// hint: use receiveString(ch) to drain a value and make room
 	}()
 
 	assert(__delete_me__) // we'll need to make room for the queue, or suffer deadlocks

@@ -5,11 +5,7 @@ func aboutAllocation() {
 	*a = 3
 	assert(*a == __int__) // new() creates a pointer to the given type, like malloc() in C
 
-	type person struct {
-		name string
-		age  int
-	}
-	bob := new(person)
+	bob := new(person)         // person is the shared struct from the structs koan
 	assert(bob.age == __int__) // it can allocate memory for custom types as well
 
 	slice := make([]int, 3)

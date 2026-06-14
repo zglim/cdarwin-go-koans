@@ -2,11 +2,13 @@ package go_koans
 
 func aboutEnumeration() {
 	{
+		// Use the shared greetings list so the example data matches
+		// the other collection koans.
+		greetings := sampleGreetings
+
 		var concatenated string
 		var total int
-
-		strings := []string{"hello", " world", "!"}
-		for i, v := range strings {
+		for i, v := range greetings {
 			total += i
 			concatenated += v
 		}
@@ -16,13 +18,13 @@ func aboutEnumeration() {
 	}
 
 	{
-		var totalLength int
+		greetings := sampleGreetings
 
-		strings := []string{"hello", " world", "!"}
-		for _, v := range strings {
-			totalLength += len(v)
+		var totalLen int
+		for _, v := range greetings {
+			totalLen += len(v)
 		}
 
-		assert(totalLength == __int__) // although we may omit either value
+		assert(totalLen == __int__) // although we may omit either value
 	}
 }

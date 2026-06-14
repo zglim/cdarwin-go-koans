@@ -16,7 +16,12 @@ func aboutInterfaces() {
 	assert(rspec.executionCount == __int__) // rspec can run completely differently than bob, thanks to interfaces
 }
 
-// abstract interface and function that requires it
+// abstract interface and the shared driver that requires it.
+//
+// runTwice() is to the runner koans what copyDemo() (in
+// about_common_interfaces.go) is to the io.Reader / io.Writer koans: it takes a
+// value behind the abstract interface and triggers its behavior, without caring
+// which concrete type is actually hiding underneath.
 
 type runner interface {
 	run()

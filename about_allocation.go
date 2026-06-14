@@ -5,17 +5,14 @@ func aboutAllocation() {
 	*a = 3
 	assert(*a == __int__) // new() creates a pointer to the given type, like malloc() in C
 
-	type person struct {
-		name string
-		age  int
-	}
+	// new() works with the shared person type (see shared_types.go).
 	bob := new(person)
 	assert(bob.age == __int__) // it can allocate memory for custom types as well
 
 	slice := make([]int, 3)
 	assert(len(slice) == __int__) // make() creates slices of a given length
 
-	slice = make([]int, 3, __positive_int__) // but can also take an optional capacity
+	slice = make([]int, 3, 20) // but can also take an optional capacity
 	assert(cap(slice) == 20)
 
 	m := make(map[int]string)
